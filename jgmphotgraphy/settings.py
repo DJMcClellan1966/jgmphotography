@@ -124,7 +124,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'jgmphotography/static/')
+    os.path.join(BASE_DIR, 'jgmphotgraphy/static/')
 
 ]
 
