@@ -78,7 +78,7 @@
 
 
       </p>
-      <img src={% static ''%} height=300/>
+      <img src={% static 'headshot.jpg'%} height=300/>
     </div>
   </section>
 
@@ -106,7 +106,10 @@
 
 <footer class="text-muted">
   <div class="container text-center">
-    <p>© Jennifer McClellan {% now "Y" %}</p><a href="{% static 'privacy.pdf' %}">privacy</a>
+    <p>© Jennifer McClellan {% now "Y" %}</p>
+    <p><a href="{% static 'privacy.html' %}">privacy</a></p>
+
+    <p><a href="{% static 'terms.html'%}">terms of service</a></p>
 
 
     </div>
