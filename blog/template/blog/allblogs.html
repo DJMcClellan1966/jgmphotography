@@ -55,9 +55,7 @@
             <li class="nav-item">
               <a class="nav-link" href="https://www.facebook.com/profile.php?id=100004809220389">Facebook <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% static 'resume.pdf' %}">Resume</a>
-            </li>
+
             <li class="nav-item">
               <a class="nav-link active" href="{% url 'allblogs' %}">Blog</a>
             </li>
@@ -79,16 +77,16 @@
 {% for blog in blogs.all %}
 
       <a href="{% url 'detail' blog.id %}"><h3><p class="card-text">{{ blog.title }}</p></h3></a>
+      {{ blog.pub_date_pretty }}
+      <br />
       <img class="img-fluid" src="{{ blog.image.url }}"/>
       <br />
 
       <p>{{ blog.summary }}</p>
-      <br />
 
-      {{ blog.pub_date }}
-      </div>
 
 {% endfor %}
+</div>
 <hr />
 
 

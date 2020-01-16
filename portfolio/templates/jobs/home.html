@@ -73,12 +73,12 @@
     <div class="container">
       <h1>Welcome!</h1>
       <p class="lead text-muted">Thanks for coming to my site. I hope you enjoy the pictures.</p>
-      <p class='lead text-muted'>If you are interested in purchasing any please contact my by <a href="mailto:jennifer.mcclellan@jgmphotography.net" class="btn btn-primary my-2">Email Me</a></p>
-      <p class='lead text-muted'>Or at my Facebook page <a href="https://www.facebook.com/Jennifer-Golden-McClellan-Photography-101556664725140/" class="btn btn-primary my-2">Jennifer Golden McClellan Photography</a>
+      <p class='lead text-muted'>If you are interested in purchasing any please contact me at <a href="mailto:jennifer.mcclellan@jgmphotography.net">jennifer.mcclellan@jgmphotography.net</a></p>
+      <p class='lead text-muted'>Or at my Facebook page <a href="https://www.facebook.com/Jennifer-Golden-McClellan-Photography-101556664725140/">Jennifer Golden McClellan Photography</a>
 
 
       </p>
-      <img src={% static 'headshot.jpg'%} height=300/>
+      <img src={% static 'headshot.jpg'%} height=200/>
     </div>
   </section>
 
@@ -86,12 +86,12 @@
     <div class="container">
 
       <div class="row">
-        {% for job in jobs.all %}
+        {% for portfolio in portfolios.all %}
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img class="card-img-top" src="{{ job.image.url }}" />
+            <img class="card-img-top" src="{{ portfolio.image.url }}" />
             <div class="card-body">
-              <p class="card-text">{{ job.summary }}</p>
+              <a href="{% url 'detail' portfolio.id %}"><h3>{{ portfolio.title}}<h3/></a>
               </div>
             </div>
           </div>
