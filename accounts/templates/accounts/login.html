@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -53,58 +54,41 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
-              {% if user.is_authenticated %}
-              <a class="nav-item nav-link" href="javascript:{document.getElementById('logout').submit()}">Log Out</a>
-              <form id="logout" action="{% url 'logout' %}" method="POST">
-                {% csrf_token %}
-                <input type="hidden" />
-              </form>
-              {% else %}
-              <a class="nav-item nav-link" href="{% url 'signup' %}">Sign Up </a>
-              <a class="nav-item nav-link" href="{% url 'login'%}">Log in </a>
-              {% endif %}
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.facebook.com/Jennifer-Golden-McClellan-Photography-101556664725140/">Facebook <span class="sr-only">(current)</span></a>
+            </li>
 
+            <li class="nav-item">
 
-
-
+            </li>
           </ul>
         </div>
       </nav>
 </header>
 
 <main role="main">
+  <div class="container">
+  {% if error %}
+  {{ error}}
+  <br/>
+  <br/>
+  {% endif %}
+  <h1>Log In</h1>
 
-  <section class="jumbotron text-center">
-    <div class="container">
-      <h1>Welcome!</h1>
-      <p class="lead text-muted">Thanks for coming to my site. I hope you enjoy the pictures.</p>
-      <p class='lead text-muted'>If you are interested in purchasing any please contact me at <a href="mailto:jennifer.mcclellan@jgmphotography.net">jennifer.mcclellan@jgmphotography.net</a></p>
-      <p class='lead text-muted'>Or at my Facebook page <a href="https://www.facebook.com/Jennifer-Golden-McClellan-Photography-101556664725140/">Jennifer Golden McClellan Photography</a>
-
-
-      </p>
-
-    </div>
-  </section>
-
-  <div class="album py-5 bg-light">
-    <div class="container">
-
-      <div class="row">
-        {% for portfolio in portfolios.all %}
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img class="card-img-top" src="{{ portfolio.image.url }}" />
-            <div class="card-body">
-              <a href="{% url 'detail' portfolio.id %}"><h3>{{ portfolio.title}}<h3/></a>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-        </div>
-      </div>
-
+      <form class="" action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        Username:
+        <br/>
+        <input type="text" name="username" />
+        <br/>
+        Password:
+        <br/>
+        <input type="password" name="password" />
+        <br/>
+        <br/>
+        <input type="submit" class="btn btn-primary" value="Log In">
+      </form>
+  </div>
 
 
 </main>
