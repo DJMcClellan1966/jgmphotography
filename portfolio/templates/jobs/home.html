@@ -78,7 +78,7 @@
     <div class="container">
       <h1>Welcome!</h1>
       <p class="lead text-muted">Thanks for coming to my site. I hope you enjoy the pictures.</p>
-      <p class='lead text-muted'>If you are interested in purchasing any please contact me at <a href="mailto:jennifer.mcclellan@jgmphotography.net">jennifer.mcclellan@jgmphotography.net</a></p>
+      <p class='lead text-muted'>If you are interested in purchasing any or using my services please contact me at <a href="mailto:jennifer.mcclellan@jgmphotography.net">jennifer.mcclellan@jgmphotography.net</a></p>
       <p class='lead text-muted'>Or at my Facebook page <a href="https://www.facebook.com/Jennifer-Golden-McClellan-Photography-101556664725140/">Jennifer Golden McClellan Photography</a>
 
 
@@ -96,7 +96,7 @@
           <div class="card mb-4 shadow-sm">
             <img class="card-img-top" src="{{ portfolio.image.url }}" />
             <div class="card-body">
-              <a href="{% url 'detail' portfolio.id %}"><h3>{{ portfolio.title}}<h3/></a>
+              <a href="{% url 'detail' portfolio.id %}"><h3>{{ portfolio.summary}}<h3/></a>
               </div>
             </div>
           </div>
@@ -110,14 +110,16 @@
 </main>
 
 <footer class="text-muted">
-  <div class="container text-center">
-    <p>© Jennifer McClellan {% now "Y" %} <p />
-    <p><a href="{% url 'privacy' %}">privacy</a></p>
+  <div class="container">
+    <p class="float">
+      <a href="#">Back to top</a>
+    </p>
 
-    <p><a href="{% url 'terms'%}">terms of service</a></p>
-
-      <a class="nav-link" href="https://www.facebook.com/Jennifer-Golden-McClellan-Photography-101556664725140/">Facebook <span class="sr-only">(current)</span></a>
-    </div>
+    <p>Album is &copy; Jennifer McClellan {% now "Y" %}. </p>
+    <p>If you are interested in my services contact me at <a href="mailto:jennifer.mcclellan@jgmphotography.net">jennifer.mcclellan@jgmphotography.net</a>.
+     Or visit my <a href="https://www.facebook.com/Jennifer-Golden-McClellan-Photography-101556664725140/">Facebook</a> page.</p>
+    <p>Read <a href="{% url 'privacy' %}">privacy policy</a> or <a href="{% url 'terms'%}">terms of service</a></p>
+  </div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
