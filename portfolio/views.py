@@ -9,4 +9,4 @@ def terms(request):
     return render(request, 'jobs/terms.html')
 
 def privacy(request):
-    return render(request, 'jobs/privacy.html')    
+    return render(request, 'jobs/privacy.html')

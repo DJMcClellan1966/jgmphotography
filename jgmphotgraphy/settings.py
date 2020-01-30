@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'portfolio.apps.PortfolioConfig',
-    'accounts.apps.AccountsConfig',
+    'slideshow.apps.SlideshowConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,7 +45,11 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'crispy_forms',
+
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -62,7 +66,7 @@ ROOT_URLCONF = 'jgmphotgraphy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['jgmphotography/templates'],
+        'DIRS': ['jgmphotography/templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

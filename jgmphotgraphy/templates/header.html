@@ -48,20 +48,34 @@ column-count: 1;
 -moz-column-width: 100%;
 column-width: 100%;
 }
-
 }
 
+@media (max-width: 400px) {
+.btn.filter {
+padding-left: 1.1rem;
+padding-right: 1.1rem;
+}
+}
 </style>
 
 <script>
-
+$(function() {
+var selectedClass = "";
+$(".filter").click(function(){
+selectedClass = $(this).attr("data-rel");
+$("#gallery").fadeTo(100, 0.1);
+$("#gallery div").not("."+selectedClass).fadeOut().removeClass('animation');
+setTimeout(function() {
+$("."+selectedClass).fadeIn().addClass('animation');
+$("#gallery").fadeTo(300, 1);
+}, 300);
+});
+});
 </script>
 
   <link href="album.css" rel="stylesheet">
 </head>
 <body>
-  <div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId=1857748991025700&autoLogAppEvents=1"></script>
   <header>
   <div class="collapse bg-dark" id="navbarHeader">
         <div class="container">
@@ -80,18 +94,10 @@ column-width: 100%;
 
             <h4 class="text-white">Features</h4>
             <ul class="list-unstyled">
-                {% if user.is_authenticated %}
-                <a class="nav-item nav-link" href="{% url 'saved_image' %}"><span class="oi oi-plus"></span></a>
-                <a class="nav-item nav-link" href="javascript:{document.getElementById('logout').submit()}" onclick="">Logout</a>
-              <form id="logout" method="POST" action="{% url 'account_logout' %}">
-                {% csrf_token %}
-                <input type="hidden" />
-              </form>
-              {% else %}
               <li><a href="{% url 'account_login'%}" class="text-white">Login</a></li>
               <li><a href="{% url 'account_signup'%}" class="text-white">Sign Up</a></li>
-              <li><a href="{% provider_login_url 'facebook' %}" class="text-white">Login with Facebook</a></li
-              {% endif %}
+              <li><a href="{% url 'account_logout'%}" class="text-white">Logout</a></li>
+              <li><a href="{% provider_login_url 'facebook' %}" class="text-white">Login with Facebook</a></li>
             </ul>
           </div>
         </div>
@@ -101,7 +107,7 @@ column-width: 100%;
       <div class="container d-flex justify-content-between">
         <a href="#" class="navbar-brand d-flex align-items-center">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2" viewBox="0 0 24 24" focusable="false"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-          <strong>Jennifer Golden McClellan Photography</strong>
+          <strong>Your slideshow</strong>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -110,51 +116,22 @@ column-width: 100%;
     </div>
   </header>
 
-  <main role="main">
-    <div class="jumbotron">
-      {% if user.is_authenticated %}
-      <h1>Welcome {{ user.username }} !</h1>
-      {% else %}
-      <h1>Welcome!</h1>
-      {% endif %}
-      <p class="lead text-muted">Thank you for visiting my site. I hope you enjoy the pictures.</p>
-      <p class="lead text-muted">Please like me on <a href="https://www.facebook.com/Jennifer-Golden-McClellan-Photography-101556664725140/">Facebook.</a></p>
-      <p class="lead text-muted">If you like an image please share to facebook </p>
-    </div>
-  </main>
+  {% block content %}
 
-        <div class="gallery" id="gallery">
-          <div class="image-box">
-            {% for portfolio in portfolios.all %}
-            <div class="card">
-              <div class="mb-3 pics animation ">
-
-                <img class="bd-placeholder-img card-img-top" src="{{ portfolio.image.url }}"  />
-                <div class="card-body">
-
-                  <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="" data-layout="button" data-action="like" data-size="small" data-share="true"></div>
-              </div>
-            </div>
-          </div>  
-            {% endfor %}
-          </div>
-        </div>
-
-
-
-<footer class="text-center" id="page-footer-wrapper">
-  <div class="container">
-    <p class="float">
-      <a href="#">Back to top</a>
-    </p>
-    <p>Album is &copy; Jennifer McClellan {% now "Y" %}. </p>
-    <p>If you are interested in my services contact me <a href="mailto:jennifer.mcclellan@jgmphotography.net"><img src={% static 'envelope.svg'%} height=25/></a>
-      Or visit <a href="https://www.facebook.com/Jennifer-Golden-McClellan-Photography-101556664725140/"><img src={% static 'facebook.svg'%} height=25/></a></p>
-      <p>Read <a href="{% url 'privacy' %}">privacy policy</a> or <a href="{% url 'terms' %}">terms of service</a></p>
-    </div>
-  </footer>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-</body>
-</html>
+  {% endblock %}
+  <footer class="text-center" id="page-footer-wrapper">
+    <div class="container">
+      <p class="float">
+        <a href="#">Back to top</a>
+      </p>
+      <p>Album is &copy; Jennifer McClellan {% now "Y" %}. </p>
+      <p>If you are interested in my services contact me <a href="mailto:jennifer.mcclellan@jgmphotography.net"><img src={% static 'envelope.svg'%} height=25/></a>
+        Or visit <a href="https://www.facebook.com/Jennifer-Golden-McClellan-Photography-101556664725140/"><img src={% static 'facebook.svg'%} height=25/></a></p>
+        <p>Read <a href="{% url 'privacy' %}">privacy policy</a> or <a href="{% url 'terms' %}">terms of service</a></p>
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+  </html>
