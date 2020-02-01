@@ -58,13 +58,7 @@
 
       <script>
 
-      function openModal() {
-        document.getElementById("myModal").style.display = "block";
-      }
-
-      function closeModal() {
-        document.getElementById("myModal").style.display = "none";
-      }
+      
       </script>
 
       <link href="album.css" rel="stylesheet">
@@ -96,10 +90,6 @@
                     {% csrf_token %}
                     <input type="hidden" />
                   </form>
-                  {% else %}
-                  <li><a href="{% url 'account_login'%}" class="text-white">Login</a></li>
-                  <li><a href="{% url 'account_signup'%}" class="text-white">Sign Up</a></li>
-                  <li><a href="{% provider_login_url 'facebook' %}" class="text-white">Login with Facebook</a></li
                     {% endif %}
                   </ul>
                 </div>
@@ -121,33 +111,15 @@
 
         <main role="main">
           <div class="jumbotron">
-            {% if user.is_authenticated %}
-            <h1>Welcome {{ user.username }} !</h1>
-            {% else %}
-            <h1>Welcome!</h1>
-            <p class="lead text-muted">Thank you for visiting my site. I hope you enjoy the pictures.</p>
-            <p class="lead text-muted">If you like an image please share to facebook </p>
-            {% endif %}
-            <p class="lead text-muted">Please like my page on <a href="https://www.facebook.com/Jennifer-Golden-McClellan-Photography-101556664725140/">Facebook.</a></p>
+
+            <h1>Favorites</h1>
           </div>
         </main>
 
         <div class="gallery" id="gallery">
-          <div class="image-box">
-            {% for portfolio in portfolios.all %}
-            <div class="card">
-              <div class="mb-3 pics animation ">
+          {% block content %}
 
-                <img class="bd-placeholder-img card-img-top" src="{{ portfolio.image.url }}"/>
-                <div class="card-body">
-
-                  <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="" data-layout="button" data-action="like" data-size="large" data-share="true"></div>
-
-                </div>
-              </div>
-            </div>
-            {% endfor %}
-          </div>
+          {% endblock %}
         </div>
 
 
@@ -157,7 +129,7 @@
             <p class="float">
               <a href="#">Back to top</a>
             </p>
-            <p>Album is &copy; Jennifer McClellan {% now "Y" %}. </p>
+            <p>Sharing is Caring &copy; Jennifer McClellan {% now "Y" %}. </p>
             <p>If you are interested in my services contact me <a href="mailto:jennifer.mcclellan@jgmphotography.net"><img src={% static 'envelope.svg'%} height=25/></a>
               Or visit <a href="https://www.facebook.com/Jennifer-Golden-McClellan-Photography-101556664725140/"><img src={% static 'facebook.svg'%} height=25/></a></p>
               <p>Read <a href="{% url 'privacy' %}">privacy policy</a> or <a href="{% url 'terms' %}">terms of service</a></p>
