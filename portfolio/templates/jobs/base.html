@@ -3,138 +3,73 @@
 <head>
   {% load static %}
   {% load socialaccount %}
+  <!DOCTYPE html>
+  <html lang="en">
+      <head>
+          <meta charset="utf-8">
+          <title>{% block title %}{% endblock %}</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  		<!-- Bootstrap -->
+  		<link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet" media="screen">
+  		<link href="{{ STATIC_URL }}css/screen.css" rel="stylesheet" media="screen">
+  	    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  	    <!--[if lt IE 9]>
+  	      <script src="{{ STATIC_URL }}js/html5shiv.min.js"></script>
+  	      <script src="{{ STATIC_URL }}js/respond.min.js"></script>
+  	    <![endif]-->
+      </head>
+      <body>
+          <!-- Navigation -->
+  		<nav class="navbar navbar-default" role="navigation">
+  		  <!-- Brand and toggle get grouped for better mobile display -->
+  		  <div class="navbar-header">
+  		    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+  		      <span class="sr-only">Toggle navigation</span>
+  		      <span class="icon-bar"></span>
+  		      <span class="icon-bar"></span>
+  		      <span class="icon-bar"></span>
+  		    </button>
+  		    <a class="navbar-brand" href="/">Photologue example project</a>
+  		  </div>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-  <meta name="generator" content="Jekyll v3.8.6">
-  <title>Jennifer Golden McClellan Photography</title>
-
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <!-- Favicons -->
-  <link rel="apple-touch-icon" href="/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-  <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-  <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-  <link rel="manifest" href="/docs/4.4/assets/img/favicons/manifest.json">
-  <link rel="mask-icon" href="/docs/4.4/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
-  <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon.ico">
-  <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
-  <meta name="theme-color" content="#563d7c">
-
-
-  <style>
-  .gallery {
-    -webkit-column-count: 3;
-    -moz-column-count: 3;
-    column-count: 3;
-    -webkit-column-width: 33%;
-    -moz-column-width: 33%;
-    column-width: 33%; }
-    .gallery .pics {
-      -webkit-transition: all 350ms ease;
-      transition: all 350ms ease; }
-      .gallery .animation {
-        -webkit-transform: scale(1);
-        -ms-transform: scale(1);
-        transform: scale(1); }
-
-        @media (max-width: 450px) {
-          .gallery {
-            -webkit-column-count: 1;
-            -moz-column-count: 1;
-            column-count: 1;
-            -webkit-column-width: 100%;
-            -moz-column-width: 100%;
-            column-width: 100%;
-          }
-
-        }
-
-
-
-      </style>
-
-      <script>
-
-      
-      </script>
-
-      <link href="album.css" rel="stylesheet">
-    </head>
-    <body>
-      <div id="fb-root"></div>
-      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId=1857748991025700&autoLogAppEvents=1"></script>
-      <header>
-        <div class="collapse bg-dark" id="navbarHeader">
-          <div class="container">
-            <div class="row">
-              <div class="col-sm-8 col-md-7 py-4">
-                <h4 class="text-white">About</h4><img src={% static 'headshot.jpg'%} height=50/>
-                <p class="text-muted"> my passion for photography! </p>
-              </div>
-              <div class="col-sm-4 offset-md-1 py-4">
-                <h4 class="text-white">Contact</h4>
-                <ul class="list-unstyled">
-                  <li><a href="#" class="text-white"></a></li>
-                  <li><a href="https://www.facebook.com/Jennifer-Golden-McClellan-Photography-101556664725140/" class="text-white">Like on Facebook</a></li>
-                  <li><a href="mailto:jennifer.mcclellan@jgmphotography.net" class="text-white">Email me</a></li>
-                </ul>
-
-                <hr>
-                <ul class="list-unstyled">
-                  {% if user.is_authenticated %}
-                  <a class="nav-item nav-link" href="javascript:{document.getElementById('logout').submit()}" onclick="">Logout</a>
-                  <form id="logout" method="POST" action="{% url 'account_logout' %}">
-                    {% csrf_token %}
-                    <input type="hidden" />
-                  </form>
-                    {% endif %}
-                  </ul>
-                </div>
-              </div>
-            </div>
+  		  <!-- Collect the nav links, forms, and other content for toggling -->
+  		  <div class="collapse navbar-collapse navbar-ex1-collapse">
+  		    <ul class="nav navbar-nav">
+  			    <li class="home"><a href="/">Home</a></li>
+  			    <li class="galleries dropdown">
+  					<a data-target="#" href="" class="dropdown-toggle" data-toggle="dropdown">
+  			            Gallery views<b class="caret"></b>
+  			        </a>
+  					<ul class="dropdown-menu">
+  						<li class="sub-page"><a href="{% url 'photologue:pl-gallery-archive' %}">Date views</a></li>
+  						<li class="sub-page"><a href="{% url 'photologue:gallery-list' %}">List views</a></li>
+  					</ul>
+  				</li>
+  			    <li class="photos dropdown">
+  					<a data-target="#" href="" class="dropdown-toggle" data-toggle="dropdown">
+  			            Photo views<b class="caret"></b>
+  			        </a>
+  					<ul class="dropdown-menu">
+  						<li class="sub-page"><a href="{% url 'photologue:pl-photo-archive' %}">Date views</a></li>
+  						<li class="sub-page"><a href="{% url 'photologue:photo-list' %}">List views</a></li>
+  					</ul>
+  				</li>
+  		    </ul>
+  		  </div><!-- /.navbar-collapse -->
+  		</nav>
+      	<div class="container">
+          	{% block content %}{% endblock %}
           </div>
-          <div class="navbar navbar-dark bg-dark shadow-sm">
-            <div class="container d-flex justify-content-between">
-              <a href="#" class="navbar-brand d-flex align-items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2" viewBox="0 0 24 24" focusable="false"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-                <strong>Jennifer Golden McClellan Photography</strong>
-              </a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-            </div>
-          </div>
-        </header>
-
-        <main role="main">
-          <div class="jumbotron">
-
-            <h1>Favorites</h1>
-          </div>
-        </main>
-
-        <div class="gallery" id="gallery">
-          {% block content %}
-
-          {% endblock %}
-        </div>
-
-
-
-        <footer class="text-center" id="page-footer-wrapper">
-          <div class="container">
-            <p class="float">
-              <a href="#">Back to top</a>
-            </p>
+          
             <p>Sharing is Caring &copy; Jennifer McClellan {% now "Y" %}. </p>
             <p>If you are interested in my services contact me <a href="mailto:jennifer.mcclellan@jgmphotography.net"><img src={% static 'envelope.svg'%} height=25/></a>
               Or visit <a href="https://www.facebook.com/Jennifer-Golden-McClellan-Photography-101556664725140/"><img src={% static 'facebook.svg'%} height=25/></a></p>
               <p>Read <a href="{% url 'privacy' %}">privacy policy</a> or <a href="{% url 'terms' %}">terms of service</a></p>
             </div>
           </footer>
+          <script src="{{ STATIC_URL }}js/jquery.js"></script>
+          <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+          <script src="{{ STATIC_URL }}js/project.js"></script>
           <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
           <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
           <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
