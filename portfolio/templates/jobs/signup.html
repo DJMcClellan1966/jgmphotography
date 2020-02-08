@@ -1,0 +1,71 @@
+{% extends 'jobs/base.html' %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+
+
+{% get_providers as socialaccount_providers %}
+
+{% if socialaccount_providers %}
+<p>{% blocktrans with site.name as site_name %}<h3> If you have an existing Facebook account you can sign in using it</h3>{% endblocktrans %}</p>
+
+<div class="socialaccount_ballot">
+
+  <ul class="socialaccount_providers">
+    <h3>{% include "socialaccount/snippets/provider_list.html" with process="login" %}</h3>
+  </ul>
+
+  <h4><div class="login-or">{% trans 'or' %}</div></h4>
+
+</div>
+
+{% include "socialaccount/snippets/login_extra.html" %}
+
+{% else %}
+<p>{% blocktrans %}If you have not created an account yet, then please
+<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+{% endif %}
+
+</div>
+</div>
+
+<div class="container"
+<div class="row">
+{% if error %}
+{{ error }}
+<br />
+<br />
+{% endif %}
+
+<h3>Sign Up!</h3>
+
+<form method="POST" action="{% url 'signup' %}">
+{% csrf_token %}
+<br/>
+Email:
+<br/>
+<input type="email" name="email" value="">
+<br/>
+Username:
+<br />
+<input type="text" name="username" />
+<br />
+Password:
+<br />
+<input type="password" name="password1" />
+<br />
+Confirm Password:
+<br />
+<input type="password" name="password2" />
+<br />
+<br />
+<input class="btn btn-primary" type="submit" value="Sign Up!" />
+</form>
+</div>
+</div>
+
+
+{% endblock %}

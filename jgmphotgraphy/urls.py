@@ -14,7 +14,8 @@ urlpatterns = [
     path('', views.home, name ='home'),
     path('portfolio/', include('portfolio.urls')),
     path('accounts/', include('allauth.urls')),
-    path('photologue/', include('photologue.urls', namespace='hotologue')),
+    path('photologue/', include('photologue.urls')),
+    
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,18 +1,35 @@
-{% extends 'jobs/base.html' %}
-
-{% block title %}Photologue example project{% endblock %}
+{% extends "jobs/gallerybase.html" %}
 
 {% block content %}
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="page-header">
-			  <h1>Welcome to the Photologue example project</h1>
-			</div>
-			<p>This is a quick demo of the Photologue application - just click on
-			the menu options above.</p>
-			<p>It uses the built-in <a href="http://getbootstrap.com/">Bootstrap</a>-compatible
-			templates that you can use to get you quickly up and running, or completely
-			replace with your own templates.</p>
-		</div>
-	</div>
+
+
+  <body class="text-center" >
+
+            <li><a href="/">Home</a></li>
+            <li class="galleries dropdown">
+              <a data-target="#" href="" class="dropdown-toggle" data-toggle="dropdown">
+                Gallery views<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="sub-page"><a href="/photologue/gallery/">Date views</a></li>
+                <li class="sub-page"><a href="/photologue/gallerylist/">List views</a></li>
+              </ul>
+            </li>
+            <li class="photos dropdown">
+              <a data-target="#" href="" class="dropdown-toggle" data-toggle="dropdown">
+                Photo views<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="sub-page"><a href="/photologue/photo/">Date views</a></li>
+                <li class="sub-page"><a href="/photologue/photolist/">List views</a></li>
+              </ul>
+              </li>
+
+
+</body>
+
+
+
+
+
 {% endblock %}

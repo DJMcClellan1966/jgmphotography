@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
-    'crispy_forms',
+    'bootstrapform',
     'photologue',
     'sortedm2m',
 
@@ -68,8 +68,8 @@ ROOT_URLCONF = 'jgmphotgraphy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['jgmphotography/templates',],
-        'APP_DIRS': False,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -79,10 +79,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
             ],
              # start - please add only if APP_DIRS is False
-            'loaders': [
-                'django.template.loaders.filesystem.Loader',
-                'django.template.loaders.app_directories.Loader',
-            ],
+            #'loaders': [
+                #'django.template.loaders.filesystem.Loader',
+                #'django.template.loaders.app_directories.Loader',
+            #],
         },
     },
 ]
@@ -150,7 +150,6 @@ USE_L10N = True
 USE_TZ = True
 
 SITE_ID = 1
-
 LOGIN_REDIRECT_URL = 'home'
 
 # Provider specific settings
@@ -163,6 +162,14 @@ SOCIALACCOUNT_PROVIDERS = {
         },
 }
 
+
+#or any other page
+#ACCOUNT_LOGOUT_REDIRECT_URL ='/account/login/'
+
+# redirects to profile page if not configured.
+#LOGIN_REDIRECT_URL = '/account/email/'
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/

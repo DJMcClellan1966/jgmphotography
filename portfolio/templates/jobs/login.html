@@ -1,0 +1,79 @@
+{% extends 'jobs/base.html' %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+
+
+{% get_providers as socialaccount_providers %}
+
+{% if socialaccount_providers %}
+<p>{% blocktrans with site.name as site_name %}<h3>Please sign in with your existing Facebook account</h3>{% endblocktrans %}</p>
+
+<div class="socialaccount_ballot">
+
+  <ul class="socialaccount_providers">
+    <h3>{% include "socialaccount/snippets/provider_list.html" with process="login" %}</h3>
+  </ul>
+
+  <h4><div class="login-or">{% trans 'or' %}</div></h4>
+
+</div>
+
+{% include "socialaccount/snippets/login_extra.html" %}
+
+{% else %}
+<p>{% blocktrans %}If you have not created an account yet, then please
+<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+{% endif %}
+
+</div>
+</div>
+<div class="container"
+<div class="row">
+  {% if error %}
+  {{ error }}
+  <br />
+  <br />
+  {% endif %}
+
+  <h3>Login</h3>
+
+  <form method="POST" action="{% url 'login' %}">
+  {% csrf_token %}
+  <br/>
+  Username:
+  <br />
+  <input type="text" name="username" />
+  <br />
+  Password:
+  <br />
+  <input type="password" name="password" />
+  <br />
+  <br />
+  <input class="btn btn-primary" type="submit" value="Login" />
+  </form>
+  <br/>
+  <br/>
+  </div>
+</div>
+
+<div class="container"
+  <div class="row">
+
+    <h4>Forgot your password?</h4>
+  <p>Enter your email address below.</p>
+
+  <form method="POST" action="{% url 'account_reset_password' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Reset Password!">
+  </form>
+  </div>
+</div>
+
+
+
+{% endblock %}
