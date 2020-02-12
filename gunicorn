@@ -1,0 +1,12 @@
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=djangodeploy
+Group=www-data
+WorkingDirectory=/douglasmcclellan2020/jgmphotography/jgmphotgraphy
+ExecStart=/douglasmcclellan2020/jgmphotography/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/douglasmcclellan2020/jgmphotography/jgmphotography.sock jgmphotgraphy.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
